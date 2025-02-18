@@ -1,0 +1,32 @@
+.input-radio {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: var(--offset);
+    margin-bottom: 1em;
+    cursor: pointer;
+}
+
+.radio-icon {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    border-radius: 50%;
+    background-color: var(--color-icon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: calc(var(--offset) * 0.7);
+    min-height: calc(var(--offset) * 0.7);
+}
+
+.radio-icon svg {
+    width: calc(var(--offset) * 0.6);
+    height: calc(var(--offset) * 0.4);
+    stroke: var(--color-text-secondary);
+}
+
+.input-radio.checked .radio-icon {
+    background-color: var(--color-text-green);
+}

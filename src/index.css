@@ -1,0 +1,258 @@
+:root {
+	--ffI: "Inter";
+
+	--color-text-primary: #444444;
+	--color-text-secondary: #FFFFFF;
+	--color-text-green: #00C55C;
+	--color-text-dark-blue: #001E80;
+	--color-icon: #AFAFAF;
+	--color-bg-gray: #f1eff5;
+	--color-bg-dark-gray: #b6b3c4;
+
+	--fz: max(calc(1 * 1vw), 15px);
+	--offset: max(calc(1.25 * 1vw), 15px);
+	--offset-xxxl: calc(var(--offset) * 10);
+	--offset-xxl: calc(var(--offset) * 8);
+	--offset-xl: calc(var(--offset) * 7);
+	--offset-l: calc(var(--offset) * 6);
+	--offset-m: calc(var(--offset) * 5);
+	--offset-s: calc(var(--offset) * 4);
+}
+
+@font-face {
+	font-family: 'Inter';
+	font-display: swap;
+	src: url("../fonts/Inter-Medium.ttf") format("truetype");
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Inter';
+	font-display: swap;
+	src: url("../fonts/Inter-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Inter';
+	font-display: swap;
+	src: url("../fonts/Inter-SemiBold.ttf") format("truetype");
+	font-weight: 600;
+	font-style: normal;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+}
+
+body {
+	background-color: #e2e8f0;
+	color: var(--color-text-black);
+	font-family: var(--ffI), sans-serif;
+	touch-action: manipulation;
+	user-select: auto;
+	font-size: var(--fz);
+	position: relative;
+	min-height: 100vh;
+}
+
+::selection {
+	background-color: #ccc5db;
+	color: #001E80;
+	-webkit-text-fill-color: #001E80;
+}
+
+::-webkit-scrollbar {
+	width: 0 !important;
+	height: 0 !important;
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 50px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	user-select: text;
+	word-break: break-word;
+}
+
+p {
+	user-select: text;
+	word-break: break-word;
+}
+
+details {
+	display: block;
+}
+
+summary {
+	list-style: none;
+	cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+	display: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	outline: none;
+	text-wrap: balance;
+	user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
+	outline: none;
+}
+
+img {
+	display: block;
+}
+
+button {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	font-size: var(--fz);
+	padding: 0;
+	font-family: "Inter", sans-serif;
+	user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
+	outline: none;
+
+	svg,
+	span {
+		pointer-events: none;
+	}
+}
+
+input {
+	font-family: var(--ffI), sans-serif;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+textarea {
+	resize: none;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+[hidden],
+[type="hidden"],
+.visually-hidden,
+.tns-visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	clip-path: inset(100%);
+	clip: rect(0 0 0 0);
+	overflow: hidden;
+}
+
+.main-wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+	overflow-x: hidden;
+	width: 100vw;
+}
+
+.footer {
+	flex: 1;
+}
+
+form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+select {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	border: none;
+	outline: none;
+}
+
+.form-label {
+	width: 100%;
+}
+
+.custom-select {
+	position: relative;
+}
+
+.custom-select.show {
+	color: var(--color-text-primary);
+}
+
+.custom-select::after {
+	user-select: none;
+	content: '';
+	position: absolute;
+	z-index: 0;
+	top: 50%;
+	right: 1em;
+	transform: translate(-50%, -50%);
+	transform-origin: center;
+	display: block;
+	width: calc(var(--offset) * 0.6);
+	height: calc(var(--offset) * 0.4);
+	background-image: url('/images/form-select.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	transition-property: transform;
+	transition-duration: 0.5s;
+}
+
+
+.custom-select.small::after {
+	width: calc(var(--offset) * 0.5);
+	height: calc(var(--offset) * 0.4);
+	background-image: url('/images/form-select-small.svg');
+}
+
+.custom-select.open::after {
+	transform: translate(-50%, -50%) rotate(180deg);
+}
+
+.radios-wrapper {
+	position: relative;
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+}
+
+.react-datepicker__day--selected {
+	background-color: var(--color-bg-dark-gray) !important;
+}

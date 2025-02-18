@@ -1,0 +1,19 @@
+.text {
+    font-weight: 500;
+    font-size: calc(var(--fz) * 0.85);
+    color: var(--color-text-primary);
+    margin-bottom: 0.5em;
+}
+
+.small {
+    font-weight: 500;
+    font-size: calc(var(--fz) * 0.7);
+    color: var(--color-text-primary);
+    margin-bottom: 0;
+}
+
+.big {
+    font-weight: 600;
+    font-size: var(--fz);
+    color: var(--color-text-dark-blue);
+}

@@ -1,0 +1,136 @@
+.input-date {
+    display: grid;
+    grid-template-columns: 20% 40% 30% 10%;
+    width: 100%;
+    gap: 1em;
+    margin-bottom: var(--offset);
+}
+
+.dropdown {
+    position: relative;
+    display: flex;
+    gap: 1em;
+    width: 100%;
+}
+
+.select {
+    padding: calc(var(--offset) * 0.4) calc(var(--offset) * 0.6);
+    border-radius: 1.2em;
+    font-weight: 500;
+    font-size: calc(var(--fz) * 0.7);
+    color: var(--color-bg-dark-gray);
+    background-color: var(--color-bg-gray);
+    border: none;
+    cursor: pointer;
+    transition: box-shadow 0.5s;
+    margin-bottom: 1em;
+    width: 100%;
+}
+
+.day {
+    min-width: calc(var(--offset) * 3);
+}
+
+.year {
+    min-width: calc(var(--offset) * 4);
+}
+
+.month {
+    min-width: calc(var(--offset) * 7);
+}
+
+
+.select::after {
+    right: 0.5em;
+}
+
+.select.show {
+    font-weight: bold;
+}
+
+.options {
+    position: absolute;
+    width: 100%;
+    background-color: var(--color-bg-gray);
+    border-radius: 0.5em;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.2);
+    max-height: calc(var(--offset) * 12);
+    overflow-y: auto;
+    z-index: 10;
+    margin-top: 0.5em;
+}
+
+.options::-webkit-scrollbar {
+    width: calc(var(--offset) * 0.5) !important;
+    height: calc(var(--offset) * 2) !important;
+    border-radius: 0.5em;
+    background-color: var(--color-text-secondary);
+}
+
+.options::-webkit-scrollbar-thumb {
+    border-radius: 0.3em;
+    background-color: var(--color-bg-dark-gray);
+}
+
+.option {
+    padding: calc(var(--offset) * 0.6);
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: calc(var(--fz) * 0.6);
+}
+
+.option:hover {
+    background-color: var(--color-bg-dark-gray);
+    color: white;
+}
+
+.custom-calendar {
+
+    width: calc(var(--offset) * 1.5);
+    height: calc(var(--offset) * 1.5);
+}
+
+.custom-calendar input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}
+
+
+.calendar-icon {
+    width: calc(var(--offset) * 1.4);
+    height: calc(var(--offset) * 1.4);
+    border-radius: 0.6em;
+    box-shadow: 0 0 0 0.1em var(--color-icon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    transition-property: box-shadow;
+}
+
+.calendar-icon:hover,
+.calendar-icon:focus {
+    box-shadow: 0 0 0 0.1em var(--color-text-primary);
+}
+
+.calendar-icon:hover svg,
+.calendar-icon:focus svg {
+    stroke: var(--color-text-primary);
+}
+
+.calendar-icon svg {
+    width: calc(var(--offset) * 0.7);
+    height: calc(var(--offset) * 0.7);
+    stroke: var(--color-icon);
+    transition-duration: 0.5s;
+    transition-property: stroke;
+}
+

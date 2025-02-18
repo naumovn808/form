@@ -1,0 +1,24 @@
+.head-steps {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-top: calc(var(--offset) * 0.3);
+    margin-bottom: var(--offset);
+    position: relative;
+    align-items: flex-start;
+}
+
+.head-steps span {
+    display: block;
+    width: 100%;
+    height: calc(var(--offset) * 0.4);
+    border-radius: 0.5em;
+    background-color: #ECEBF0;
+    transition-duration: 0.5s;
+    transition-property: background-color;
+}
+
+.head-steps span.active {
+    background-color: var(--color-text-green);
+}

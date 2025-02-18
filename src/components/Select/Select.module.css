@@ -1,0 +1,55 @@
+.dropdown {
+    position: relative;
+    width: 100%;
+    user-select: none;
+}
+
+.select {
+    width: 100%;
+    padding: calc(var(--offset) * 0.6);
+    border-radius: 1em;
+    font-weight: 600;
+    font-size: calc(var(--fz) * 0.6);
+    color: var(--color-bg-dark-gray);
+    background-color: var(--color-bg-gray);
+    border: none;
+    cursor: pointer;
+    transition: box-shadow 0.5s;
+    margin-bottom: 1em;
+}
+
+.options {
+    position: absolute;
+    width: 100%;
+    background-color: var(--color-bg-gray);
+    border-radius: 0.5em;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.2);
+    max-height: calc(var(--offset) * 12);
+    overflow-y: auto;
+    z-index: 10;
+
+}
+
+.options::-webkit-scrollbar {
+    width: calc(var(--offset) * 0.5) !important;
+    height: calc(var(--offset) * 2) !important;
+    border-radius: 0.5em;
+    background-color: var(--color-text-secondary);
+}
+
+.options::-webkit-scrollbar-thumb {
+    border-radius: 0.3em;
+    background-color: var(--color-bg-dark-gray);
+}
+
+.option {
+    padding: calc(var(--offset) * 0.6);
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: calc(var(--fz) * 0.6);
+}
+
+.option:hover {
+    background-color: var(--color-bg-dark-gray);
+    color: white;
+}
