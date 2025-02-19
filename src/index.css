@@ -247,6 +247,8 @@ select {
 }
 
 .radios-wrapper {
+	padding-top: 0.8em;
+	margin-bottom: 1em;
 	position: relative;
 	display: flex;
 	gap: 1em;
@@ -256,3 +258,42 @@ select {
 .react-datepicker__day--selected {
 	background-color: var(--color-bg-dark-gray) !important;
 }
+
+
+.attention {
+	margin-top: 0.2em;
+	min-width: 1em;
+	min-height: 1em;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--color-text-green);
+}
+
+.attention svg {
+	width: 0.5em;
+	height: 0.7em;
+}
+
+.form-wrapper {
+	min-height: 60vh;
+	margin-bottom: 1em;
+}
+
+.form-end {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
+	margin-bottom: 1em;
+}
+
+.error-message {
+	color: red;
+	font-size: 0.8em;
+	display: none; 
+  }
+  
+  .error-message.active {
+	display: block; 
+  }

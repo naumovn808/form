@@ -7,7 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 interface InputDateProps {
     dateType: 'start' | 'end';
-    dateValue: string;
+    dateValue: string | null;
     onChange: (date: string | null) => void;
 }
 

@@ -1,0 +1,39 @@
+.clue {
+    width: var(--offset);
+    height: var(--offset);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 0.1em solid var(--color-text-dark-blue);
+    color: var(--color-text-dark-blue);
+    font-weight: 500;
+    line-height: 1;
+    font-size: calc(var(--fz) * 0.8);
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    top: -50%;
+    cursor: pointer;
+}
+
+.clue::after {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    content: attr(data-clue);
+    display: block;
+    display: none;
+    text-align: center;
+    min-width: calc(var(--offset)* 4);
+    padding: 0.5em;
+    border-radius: 0.5em;
+    background-color: var(--color-text-secondary);
+    box-shadow: 0 0 0.6em 0.4em rgba(0, 0, 0, 0.1);
+
+}
+
+.clue:hover::after {
+    display: block;
+}

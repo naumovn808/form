@@ -19,9 +19,7 @@
     background-color: var(--color-bg-gray);
 }
 
-.form-step__btn:not(:disabled):hover, 
-.form-step__btn:not(:disabled):focus, 
-.form-step__btn:not(:disabled):focus-within {
+.form-step__btn:not(:disabled):hover {
     background-color: var(--color-text-green);
 }
 

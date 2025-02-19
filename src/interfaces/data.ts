@@ -1,29 +1,29 @@
 export interface Activity {
-    id: number;
+    id: string;
     name: string;
 }
 
 export interface Coverage {
-    medicine: number;
-    accident: number;
-    covid: number;
-    evacuation: number;
-    transportation: number;
-    compensation: number;
+    medicine: number | null;
+    accident: number | null;
+    covid: number | null;
+    evacuation: number | null;
+    transportation: number | null;
+    compensation: number | null;
 }
 
 export interface Program {
     id: number;
     name: string;
-    liability: number;
-    coverages: Coverage;
+    liability: number | null;
+    coverages: Coverage | null;
 }
 
 export interface Country {
     id: number;
     name: string;
-    isInSchengen: number;
-    programs: { id: number; name: string; liability: number | null; coverages: Coverage | null; }[];
+    isInSchengen: boolean;
+    programs: Program[]; 
 }
 
 export interface AppData {

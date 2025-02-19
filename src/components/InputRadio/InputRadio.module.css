@@ -3,7 +3,7 @@
     flex-direction: column;
     position: relative;
     padding-left: var(--offset);
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
     cursor: pointer;
 }
 
@@ -17,9 +17,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: calc(var(--offset) * 0.7);
-    min-height: calc(var(--offset) * 0.7);
+    width: calc(var(--offset) * 0.7);
+    height: calc(var(--offset) * 0.7);
 }
+
 
 .radio-icon svg {
     width: calc(var(--offset) * 0.6);
@@ -29,4 +30,82 @@
 
 .input-radio.checked .radio-icon {
     background-color: var(--color-text-green);
+}
+
+.input-radio span {
+    font-weight: 400;
+    font-size: calc(var(--fz) * 0.8);
+    color: var(--color-text-dark-blue);
+    margin-bottom: 0.5em;
+    transition-property: color;
+    transition-duration: 0.5s;
+}
+
+.input-radio__big .radio-icon {
+    margin-bottom: 0;
+    top: 1em;
+    left: 1em;
+    transform: translateY(30%);
+}
+
+.input-radio b {
+    font-weight: 600;
+    font-size: calc(var(--fz) * 0.8);
+    color: var(--color-text-dark-blue);
+    display: block;
+    margin-bottom: 0.5em;
+    transition-property: color;
+    transition-duration: 0.5s;
+}
+
+.input-radio__big {
+    padding: 1em;
+    padding-left: 2.5em;
+    border-radius: 1em;
+    background-color: var(--color-bg-gray);
+    box-shadow: 0 0 0 0.07em var(--color-icon);
+    transition-property: background-color, box-shadow;
+    transition-duration: 0.5s;
+}
+
+.input-radio__big:hover .radio-icon,
+.input-radio__big:focus .radio-icon {
+    background-color: var(--color-text-green);
+}
+
+.input-radio__big:hover,
+.input-radio__big:focus {
+    background-color: var(--color-text-secondary);
+    box-shadow: 0.3em 0.3em 0.3em 0 rgba(0, 0, 0, 0.1);
+}
+
+.input-radio__big:hover span,
+.input-radio__big:focus span {
+    color: var(--color-text-green);
+}
+
+.input-radio__big:hover b,
+.input-radio__big:focus b {
+    color: var(--color-text-green);
+}
+
+.input-radio__big.checked .radio-icon,
+.input-radio__big.checked .radio-icon {
+    background-color: var(--color-text-green);
+}
+
+.input-radio__big.checked,
+.input-radio__big.checked {
+    background-color: var(--color-text-secondary);
+    box-shadow: 0.3em 0.3em 0.3em 0 rgba(0, 0, 0, 0.1);
+}
+
+.input-radio__big.checked span,
+.input-radio__big.checked span {
+    color: var(--color-text-green);
+}
+
+.input-radio__big.checked b,
+.input-radio__big.checked b {
+    color: var(--color-text-green);
 }

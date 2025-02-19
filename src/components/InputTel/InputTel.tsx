@@ -1,25 +1,45 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { PhoneInput } from "react-international-phone";
+import "./InputTel.css";
+import { InputTelProps } from "./Inputtel.props";
 
-export function InputTel() {
-    const [countryCode, setCountryCode] = useState('+998'); // Код страны по умолчанию
+export default function InputTel({ onChange, value, ...props }: InputTelProps) {
 
-    const countries = [
-        { code: '+1', name: 'США' , icon : },
-        { code: '+998', name: 'Узбекистан' },
-       
-    ];
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    const handleChange = (event) => {
-        setCountryCode(event.target.value);
+
+    const handleCountryChange = (countryData: any) => {
+        console.log("Выбрана страна:", countryData);
+        setIsDropdownOpen(false);
     };
 
+    const handleDropdownToggle = (isOpen: boolean) => {
+        setIsDropdownOpen(isOpen);
+    };
+
+    const handlePhoneChange = useCallback(
+        (phone: string) => {
+            onChange(phone);
+        },
+        [onChange]
+    );
+
+
     return (
-        <select value={countryCode} onChange={handleChange}>
-            {countries.map((country) => (
-                <option key={country.code} value={country.code}>
-                    {country.name} ({country.code})
-                </option>
-            ))}
-        </select>
+        <div className="input-tel-container">
+            <PhoneInput
+                defaultCountry="uz"
+                value={value}
+                onChange={handlePhoneChange}
+                onCountryChange={handleCountryChange}
+                onDropdownToggle={handleDropdownToggle}
+                {...props}
+            />
+
+            {isDropdownOpen && (
+                <div className="react-international-phone-country-selector-dropdown">
+                </div>
+            )}
+        </div>
     );
 }

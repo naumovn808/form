@@ -2,7 +2,12 @@
     font-weight: 500;
     font-size: calc(var(--fz) * 0.85);
     color: var(--color-text-primary);
-    margin-bottom: 0.5em;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    gap: 0.5em;
+    position: relative;
+
 }
 
 .small {

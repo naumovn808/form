@@ -1,18 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { FormState } from '../interfaces/FormSlice';
 
-const initialState = {
+const initialState: FormState = {
     step: 0,
     formData: {
         country: '',
-        coverageType: [] as string[],
-        program: null as string | null,
+        coverageType: [],
+        program: null,
         startDate: '',
         endDate: '',
-        purpose: '',
         phone: '',
-        activities: [] as string[]
+        activities: []
     }
 };
+
 
 if (localStorage.getItem('step')) {
     initialState.step = Number(localStorage.getItem('step'));
@@ -21,22 +22,26 @@ if (localStorage.getItem('step')) {
 if (localStorage.getItem('formData')) {
     try {
         const storedFormData = JSON.parse(localStorage.getItem('formData') as string);
-        initialState.formData = storedFormData;
+        initialState.formData = {
+            ...initialState.formData,
+            ...storedFormData,
+        };
     } catch (error) {
         console.error("Error parsing formData from localStorage:", error);
 
         initialState.formData = {
             country: '',
-            coverageType: [] as string[],
-            program: null as string | null,
+            coverageType: [],
+            program: null,
             startDate: '',
             endDate: '',
-            purpose: '',
+
             phone: '',
-            activities: [] as string[]
+            activities: []
         };
     }
 }
+
 
 const formSlice = createSlice({
     name: 'form',
@@ -63,9 +68,13 @@ const formSlice = createSlice({
         setSelectedCoverage: (state, action: PayloadAction<string[]>) => {
             state.formData.coverageType = action.payload;
             localStorage.setItem('formData', JSON.stringify(state.formData));
+        },
+        setPhone: (state, action: PayloadAction<string>) => {
+            state.formData.phone = action.payload;
+            localStorage.setItem('formData', JSON.stringify(state.formData));
         }
     }
 });
 
-export const { setFormData, setProgram, setStep, setSelectedActivities, setSelectedCoverage } = formSlice.actions;
+export const { setFormData, setProgram, setStep, setSelectedActivities, setSelectedCoverage, setPhone } = formSlice.actions;
 export default formSlice.reducer;

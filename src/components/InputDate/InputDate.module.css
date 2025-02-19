@@ -3,7 +3,7 @@
     grid-template-columns: 20% 40% 30% 10%;
     width: 100%;
     gap: 1em;
-    margin-bottom: var(--offset);
+    margin-bottom: 0.5em;
 }
 
 .dropdown {
@@ -133,4 +133,3 @@
     transition-duration: 0.5s;
     transition-property: stroke;
 }
-

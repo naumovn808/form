@@ -1,0 +1,41 @@
+.button {
+    margin-top: auto;
+    font-family: inherit;
+    cursor: pointer;
+    transition-property: background-color, color, box-shadow;
+    transition-duration: 0.5s;
+    border: none;
+    color: var(--color-text-secondary);
+    font-style: normal;
+    font-weight: 400;
+    font-weight: 500;
+    font-size: calc(var(--fz) * 0.8);
+    padding: 0.6em;
+    border-radius: 0.5em;
+    width: fit-content;
+    background-color: var(--color-text-green);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.small {
+    padding: 0.6em 2em;
+}
+
+.big {
+    gap: 0.5em;
+    width: 100%;
+    max-width: 100%;
+}
+
+
+
+.button:hover,
+.button:focus,
+.button:focus-within {
+    background: var(--color-text-secondary);
+    color: var(--color-text-green);
+    box-shadow: 0 0 0 0.1em var(--color-text-green);
+}
