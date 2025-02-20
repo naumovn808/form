@@ -1,9 +1,6 @@
-import { SelectHTMLAttributes } from 'react';
 import { Country } from '../../interfaces/data';
 
-
-export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+export interface SelectProps {
     countries: Country[];
+    onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
-
-

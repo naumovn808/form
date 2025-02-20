@@ -1,6 +1,4 @@
-import { InputHTMLAttributes } from 'react';
-
-export interface InputTelProps extends InputHTMLAttributes<HTMLInputElement> {
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void; 
+export interface InputTelProps  {
+    onChange: (phone: string) => void;
     value: string;
 }

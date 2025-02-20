@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFormData, setStep, setProgram, setSelectedActivities, setSelectedCoverage, setPhone } from './store/formSlice';
+import { setFormData, setStep } from './store/formSlice';
 import { RootState } from './store';
-import { Activity, Program, Country, AppData } from './interfaces/data.ts';
-import data from './JSON/data.js';
+import { Activity, Country } from './interfaces/data.ts';
+import { FormData } from './interfaces/Form.ts';
+import data from './JSON/data.json';
 import InputRadio from "./components/InputRadio/InputRadio.tsx";
 import { InputDate } from "./components/InputDate/InputDate.tsx";
 import FormContainer from "./components/FormContainer/FormContainer.tsx";
@@ -15,125 +15,28 @@ import Text from "./components/Text/Text.tsx";
 import InputTel from './components/InputTel/InputTel.tsx';
 import FormButton from './components/FormButton/FormButton.tsx';
 import Clue from './components/Clue/Clue.tsx';
+import useFormValidation from './hooks/useFormValidation.ts';
+import usePrograms from './hooks/usePrograms.ts';
 
 function App() {
   const dispatch = useDispatch();
-  const [countries, setCountries] = useState<Country[]>([])
-  const [availablePrograms, setAvailablePrograms] = useState<Program[]>([]);
   const { country, program, coverageType, startDate, endDate, phone, activities } = useSelector((state: RootState) => state.form.formData);
+  const FormDataState: FormData = useSelector((state: RootState) => state.form.formData);
   const step = useSelector((state: RootState) => state.form.step);
 
-  const [errors, setErrors] = useState<{
-    country: string;
-    coverageType: string;
-    startDate: string;
-    endDate: string;
-    activities: string;
-    phone: string;
-    program: string
-  }>({
-    country: '',
-    coverageType: '',
-    startDate: '',
-    endDate: '',
-    activities: '',
-    phone: '',
-    program: ''
-  });
-
-  useEffect(() => {
-    const typedData = data as AppData;
-
-    setCountries(typedData.countries);
-  }, []);
-
-
-  useEffect(() => {
-    const typedData = data as AppData;
-
-    if (country) {
-      const selectedCountryData = typedData.countries.find(c => c.name === country);
-
-      if (selectedCountryData) {
-        const programIds = selectedCountryData.programs.map(program => program.id);
-
-        const programs = typedData.programs.filter(p => programIds.includes(p.id));
-
-        setAvailablePrograms(programs);
-      } else {
-        setAvailablePrograms([]);
-      }
-    } else {
-      setAvailablePrograms([]);
-    }
-  }, [country]);
-
-  useEffect(() => {
-    if (country) {
-      setErrors(prevErrors => ({ ...prevErrors, country: '' }));
-    }
-  }, [country])
+  const { errors, validate, clearError } = useFormValidation(FormDataState, { step });
+  const countryObject: Country | undefined = data.countries.find(c => c.name === country);
+  const availablePrograms = usePrograms(countryObject);
 
   const handleProgramSelect = (selectedProgram: string) => {
-    dispatch(setProgram(selectedProgram));
-  };
-
-  const handleActivityChange = (activityId: string) => {
-    dispatch(setSelectedActivities([activityId]));
-    setErrors(prevErrors => ({ ...prevErrors, activities: '' }))
-  };
-
-  const handleCoverageChange = (coverageType: string) => {
-    dispatch(setSelectedCoverage([coverageType]));
-    setErrors(prevErrors => ({ ...prevErrors, coverageType: '' }));
+    dispatch(setFormData({ program: selectedProgram }));
+    clearError('program');
   };
 
   const selectedProgram = useSelector((state: RootState) => state.form.formData.program);
 
-
   const handleNext = () => {
-    let isValid = true;
-    const newErrors = { ...errors };
-
-    if (!country) {
-      newErrors.country = 'Пожалуйста, выберите страну.';
-      isValid = false;
-    }
-
-    if (coverageType.length === 0) {
-      newErrors.coverageType = 'Пожалуйста, выберите тип покрытия.';
-      isValid = false;
-    }
-
-    if (!startDate) {
-      newErrors.startDate = 'Пожалуйста, выберите дату начала.';
-      isValid = false;
-    }
-
-    if (!endDate) {
-      newErrors.endDate = 'Пожалуйста, выберите дату окончания.';
-      isValid = false;
-    }
-
-    if (!activities || activities.length === 0) {
-      newErrors.activities = 'Пожалуйста, выберите хотя бы одну активность.';
-      isValid = false;
-    }
-
-    if (!phone) {
-      newErrors.phone = 'Пожалуйста, введите полный номер телефона.';
-      isValid = false;
-    }
-
-    if (step === 1) {
-      if (!program) {
-        newErrors.program = 'Пожалуйста, выберите программу.';
-        isValid = false;
-      }
-    }
-
-    setErrors(newErrors);
-
+    const isValid = validate();
     if (isValid) {
       dispatch(setStep(1));
     }
@@ -157,26 +60,41 @@ function App() {
     console.log(dataToSend);
   };
 
+  const handleActivityChange = (activityId: string) => {
+    dispatch(setFormData({ activities: [activityId] }));
+    clearError('activities');
+  };
+
+  const handlePhoneChange = (phone: string) => {
+    console.log("handlePhoneChange, phone:", phone);
+    dispatch(setFormData({ phone: phone }));
+    if (phone.length >= 10) {
+      clearError('phone');
+    }
+  };
+
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedCountry = e.target.value;
+    dispatch(setFormData({ country: selectedCountry }));
+    clearError('country');
+  };
+
+  const handleCoverageChange = (coverageType: string) => {
+    dispatch(setFormData({ coverageType: [coverageType] }));
+    clearError('coverageType');
+  };
+
   const handleStartDateChange = (date: string | null) => {
     dispatch(setFormData({ startDate: date }));
-    setErrors(prevErrors => ({ ...prevErrors, startDate: '' }))
+    clearError('startDate');
   };
 
   const handleEndDateChange = (date: string | null) => {
     dispatch(setFormData({ endDate: date }));
-    setErrors(prevErrors => ({ ...prevErrors, endDate: '' }))
+
+    clearError('endDate');
   };
 
-  const handlePhoneChange = (phone: string) => {
-    dispatch(setPhone(phone));
-    if (phone.length >= 10) {
-      setErrors(prevErrors => ({ ...prevErrors, phone: '' }));
-    }
-  };
-  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedCountry = e.target.value;
-    dispatch(setFormData({ country: selectedCountry }));
-  };
 
 
   return (
@@ -193,7 +111,7 @@ function App() {
           </Text>
           <label className="form-label" htmlFor="country">
             <Select
-              countries={countries}
+              countries={data.countries}
               id="country"
               onChange={handleCountryChange}
             />
@@ -275,7 +193,7 @@ function App() {
 
           <InputTel
             placeholder="Enter your number"
-            value={phone}
+            value={phone || ''}
             onChange={handlePhoneChange}
           />
           <span className={`error-message ${errors.phone ? 'active' : ''}`}>{errors.phone}</span>
@@ -303,6 +221,7 @@ function App() {
                     <Text appearence='small'>Медицинское лучение, репатриация и другое </Text>
                   </InputRadio>
                 ))}
+
               </>
             ) : (
               <p>Нет доступных программ для выбранной страны.</p>

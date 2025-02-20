@@ -1,21 +1,17 @@
-import { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setFormData } from '../../store/formSlice';
+import React, { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../store/index';
-import { SelectProps } from './Select.props';
 import styles from './Select.module.css';
 import cn from 'classnames';
+import { SelectProps } from './Select.props';
 
-export default function Select({ countries }: SelectProps) {
+
+
+export default function Select({ countries, onChange }: SelectProps) {
     const selectedCountry = useSelector((state: RootState) => state.form.formData.country);
-    const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    const handleSelect = (value: string) => {
-        dispatch(setFormData({ country: value }));
-        setIsOpen(false);
-    };
 
     const handleClickOutside = (e: MouseEvent) => {
         if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -46,7 +42,11 @@ export default function Select({ countries }: SelectProps) {
                         <li
                             key={index}
                             className={styles.option}
-                            onClick={() => handleSelect(country.name)}>
+                            onClick={(e) => {
+                                e.preventDefault();
+                                onChange({ target: { value: country.name } } as React.ChangeEvent<HTMLSelectElement>)
+                                setIsOpen(false)
+                            }}>
                             {country.name}
                         </li>
                     ))}

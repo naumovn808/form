@@ -1,7 +1,7 @@
 export interface Activity {
-    id: string;
+    id: number;
     name: string;
-}
+  }
 
 export interface Coverage {
     medicine: number | null;
@@ -22,9 +22,9 @@ export interface Program {
 export interface Country {
     id: number;
     name: string;
-    isInSchengen: boolean;
-    programs: Program[]; 
-}
+    isInSchengen: number;
+    programs: Program[];
+  }
 
 export interface AppData {
     activities: Activity[];

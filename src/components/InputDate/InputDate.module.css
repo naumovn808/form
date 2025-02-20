@@ -107,18 +107,18 @@
     width: calc(var(--offset) * 1.4);
     height: calc(var(--offset) * 1.4);
     border-radius: 0.6em;
-    box-shadow: 0 0 0 0.1em var(--color-icon);
+    border: 0.1em solid var(--color-icon);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition-duration: 0.5s;
-    transition-property: box-shadow;
+    transition-property: border;
 }
 
 .calendar-icon:hover,
 .calendar-icon:focus {
-    box-shadow: 0 0 0 0.1em var(--color-text-primary);
+    border: 0.1em solid var(--color-text-primary);
 }
 
 .calendar-icon:hover svg,

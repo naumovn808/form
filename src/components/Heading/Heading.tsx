@@ -3,9 +3,9 @@ import { HeadingProps } from "./Heading.props";
 
 function Heading({ children }: HeadingProps) {
   return (
-    <h1 className={styles["h1"] }>
+    <h3 className={styles["h3"] }>
       {children}
-    </h1>
+    </h3>
   );
 }
 

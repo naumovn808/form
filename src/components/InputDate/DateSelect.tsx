@@ -1,14 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './InputDate.module.css';
 import cn from 'classnames';
-
-interface DateSelectProps {
-    type: 'day' | 'month' | 'year';
-    options: { name: string; value: string; }[];
-    selectedDatePart: string;
-    onSelect: (value: string) => void;
-    className?: string;
-}
+import { DateSelectProps } from './InputDate.props';
 
 function DateSelect({ type, options, selectedDatePart, onSelect, className }: DateSelectProps) {
     const [isOpen, setIsOpen] = useState(false);

@@ -1,24 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import DateSelect from './DateSelect';
 import styles from './InputDate.module.css';
 import { getDaysInMonth } from 'date-fns';
 import { default as DatePicker } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { InputDateProps } from './InputDate.props';
 
-interface InputDateProps {
-    dateType: 'start' | 'end';
-    dateValue: string | null;
-    onChange: (date: string | null) => void;
-}
-
-export function InputDate({ dateType, dateValue, onChange }: InputDateProps) {
+export function InputDate({ dateValue, onChange }: InputDateProps) {
     const [day, setDay] = useState(() => {
         if (dateValue) {
             try {
                 const date = new Date(dateValue);
                 return String(date.getDate()).padStart(2, '0');
             } catch (error) {
-                console.error("Invalid date format:", dateValue);
+                console.error("Invalid date format:", dateValue, error);
                 return '';
             }
         }
@@ -30,7 +25,7 @@ export function InputDate({ dateType, dateValue, onChange }: InputDateProps) {
                 const date = new Date(dateValue);
                 return String(date.getMonth() + 1).padStart(2, '0');
             } catch (error) {
-                console.error("Invalid date format:", dateValue);
+                console.error("Invalid date format:", dateValue, error);
                 return '';
             }
         }
@@ -42,14 +37,16 @@ export function InputDate({ dateType, dateValue, onChange }: InputDateProps) {
                 const date = new Date(dateValue);
                 return String(date.getFullYear());
             } catch (error) {
-                console.error("Invalid date format:", dateValue);
+                console.error("Invalid date format:", dateValue, error);
                 return '';
             }
         }
         return '';
     });
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-    const previousDateValue = useRef<string>(dateValue);
+    const previousDateValue = useRef<string | null>(null);
+    const calendarRef = useRef<HTMLDivElement>(null);
+    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
     useEffect(() => {
         if (dateValue !== previousDateValue.current) {
@@ -86,6 +83,11 @@ export function InputDate({ dateType, dateValue, onChange }: InputDateProps) {
         setYear(year);
     };
 
+    const handleCalendarClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if ((e.target as HTMLElement).closest('.custom-select')) return;
+        setIsCalendarOpen(true);
+    };
+
     const handleDateChange = (date: Date | null) => {
         setSelectedDate(date);
         if (date) {
@@ -93,7 +95,6 @@ export function InputDate({ dateType, dateValue, onChange }: InputDateProps) {
             const newMonth = String(date.getMonth() + 1).padStart(2, '0');
             const newYear = String(date.getFullYear());
 
-            // Проверяем, изменились ли значения, прежде чем устанавливать их
             if (newDay !== day || newMonth !== month || newYear !== year) {
                 setDay(newDay);
                 setMonth(newMonth);
@@ -105,6 +106,7 @@ export function InputDate({ dateType, dateValue, onChange }: InputDateProps) {
             setYear('');
             onChange('');
         }
+        setIsCalendarOpen(false);
     };
 
     const generateDays = () => {
@@ -145,8 +147,21 @@ export function InputDate({ dateType, dateValue, onChange }: InputDateProps) {
         return years;
     };
 
+    const handleClickOutside = useCallback((event: MouseEvent) => {
+        if (calendarRef.current && !calendarRef.current.contains(event.target as Node)) {
+            setIsCalendarOpen(false);
+        }
+    }, []);
+    
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [handleClickOutside]);
+
     return (
-        <div className={styles['input-date']}>
+        <div className={styles['input-date']} ref={calendarRef} onClick={handleCalendarClick}>
             <DateSelect
                 className={styles['day']}
                 type="day"
@@ -176,7 +191,6 @@ export function InputDate({ dateType, dateValue, onChange }: InputDateProps) {
                     </svg>
                 </span>
                 <DatePicker
-
                     selected={selectedDate}
                     onChange={handleDateChange}
                     dateFormat="yyyy-MM-dd"
@@ -184,6 +198,8 @@ export function InputDate({ dateType, dateValue, onChange }: InputDateProps) {
                     showYearDropdown
                     yearDropdownItemNumber={100}
                     scrollableYearDropdown
+                    open={isCalendarOpen}
+                    onClickOutside={() => setIsCalendarOpen(false)}
                 />
             </label>
         </div>

@@ -1,5 +1,5 @@
-const data = {
-    activities: [
+{
+    "activities": [
         {
             "id": 0,
             "name": "Туризм"
@@ -22,7 +22,7 @@ const data = {
         }
     ],
 
-    programs: [
+    "programs": [
         {
             "id": 1,
             "name": "Silver",
@@ -90,7 +90,7 @@ const data = {
         }
     ],
 
-    countries: [
+    "countries": [
         {
             "id": 1,
             "name": "АВСТРАЛИЯ",
@@ -6683,5 +6683,3 @@ const data = {
         }
     ]
 }
-
-export default data;

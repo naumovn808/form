@@ -51,15 +51,18 @@ const formSlice = createSlice({
             state.formData = { ...state.formData, ...action.payload };
             localStorage.setItem('formData', JSON.stringify(state.formData));
         },
+        
         setProgram: (state, action: PayloadAction<string | null>) => {
             state.formData.program = action.payload;
             localStorage.setItem('formData', JSON.stringify(state.formData));
         },
+
         setStep: (state, action: PayloadAction<number>) => {
             state.step += action.payload;
             if (state.step < 0) state.step = 0;
             localStorage.setItem('step', state.step.toString());
         },
+
         setSelectedActivities: (state, action: PayloadAction<string[]>) => {
             state.formData.activities = action.payload;
             localStorage.setItem('formData', JSON.stringify(state.formData));
@@ -69,6 +72,7 @@ const formSlice = createSlice({
             state.formData.coverageType = action.payload;
             localStorage.setItem('formData', JSON.stringify(state.formData));
         },
+
         setPhone: (state, action: PayloadAction<string>) => {
             state.formData.phone = action.payload;
             localStorage.setItem('formData', JSON.stringify(state.formData));
