@@ -15,6 +15,15 @@
     transition-property: background-color;
 }
 
+@media (max-width: 980px) {
+    .form-step__btn {
+        width: calc(var(--offset) * 2);
+        height: calc(var(--offset) * 2);
+
+    }
+
+}
+
 .form-step__btn:disabled {
     background-color: var(--color-bg-gray);
 }

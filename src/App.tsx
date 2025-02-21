@@ -109,125 +109,133 @@ function App() {
             Страна путешествия
             <Clue dataSet='Подсказка' />
           </Text>
-          <label className="form-label" htmlFor="country">
-            <Select
-              countries={data.countries}
-              id="country"
-              onChange={handleCountryChange}
-            />
+          <div className="form-row">
+            <label className="form-label" htmlFor="country">
+              <Select
+                countries={data.countries}
+                onChange={handleCountryChange}
+              />
+            </label>
             <span className={`error-message ${errors.country ? 'active' : ''}`}>{errors.country}</span>
-          </label>
+          </div>
           <Text>
             Тип покрытия
             <Clue dataSet='Подсказка 2' />
           </Text>
+          <div className="form-row">
+            <InputRadio
+              name="coverages"
+              value='once'
+              checked={coverageType.includes('once')}
+              onChange={() => handleCoverageChange('once')}
+            >
+              <Text appearence='small'>Однократное путешествие</Text>
+            </InputRadio>
 
-          <InputRadio
-            name="coverages"
-            value='once'
-            checked={coverageType.includes('once')}
-            onChange={() => handleCoverageChange('once')}
-          >
-            <Text appearence='small'>Однократное путешествие</Text>
-          </InputRadio>
+            <InputRadio
+              name="coverages"
+              value='more'
+              checked={coverageType.includes('more')}
+              onChange={() => handleCoverageChange('more')}
+            >
+              <Text appearence='small'>Многократное путешествие</Text>
+            </InputRadio>
 
-          <InputRadio
-            name="coverages"
-            value='more'
-            checked={coverageType.includes('more')}
-            onChange={() => handleCoverageChange('more')}
-          >
-            <Text appearence='small'>Многократное путешествие</Text>
-          </InputRadio>
+            <span className={`error-message ${errors.coverageType ? 'active' : ''}`}>{errors.coverageType}</span>
 
-          <span className={`error-message ${errors.coverageType ? 'active' : ''}`}>{errors.coverageType}</span>
-
-
+          </div>
           <Text>
             Начало страхования
             <Clue dataSet='Подсказка 3' />
           </Text>
-          <InputDate
-            dateType="start"
-            dateValue={startDate}
-            onChange={handleStartDateChange}
-          />
-          <span className={`error-message ${errors.startDate ? 'active' : ''}`}>{errors.startDate}</span>
+
+          <div className="form-row">
+            <InputDate
+              dateType="start"
+              dateValue={startDate}
+              onChange={handleStartDateChange}
+            />
+            <span className={`error-message ${errors.startDate ? 'active' : ''}`}>{errors.startDate}</span>
+          </div>
 
           <Text>
             Конец страхования
             <Clue dataSet='Подсказка 4' />
           </Text>
-          <InputDate
-            dateType="end"
-            dateValue={endDate}
-            onChange={handleEndDateChange}
-          />
-          <span className={`error-message ${errors.endDate ? 'active' : ''}`}>{errors.endDate}</span>
+          <div className="form-row">
+            <InputDate
+              dateType="end"
+              dateValue={endDate}
+              onChange={handleEndDateChange}
+            />
+            <span className={`error-message ${errors.endDate ? 'active' : ''}`}>{errors.endDate}</span>
 
+          </div>
+
+          <div className="form-row__container"><Clue className='position' dataSet='Подсказка 5' /></div>
 
           <div className="radios-wrapper">
             {data.activities && data.activities.map((elem: Activity) => (
-
               <InputRadio
                 key={elem.id}
                 name="activities"
                 value={elem.id}
-                checked={activities !== undefined ? activities.includes(elem.id) : false}
-                onChange={() => handleActivityChange(elem.id)}
+                checked={activities !== undefined ? activities.includes(elem.id.toString()) : false}
+                onChange={() => handleActivityChange(elem.id.toString())}
               >
                 <Text appearence='small'>{elem.name}</Text>
               </InputRadio>
-
             ))}
 
-            <Clue dataSet='Подсказка 5' />
-            <span className={`error-message ${errors.activities ? 'active' : ''}`}>{errors.activities}</span>
 
+            <span className={`error-message ${errors.activities ? 'active' : ''}`}>{errors.activities}</span>
           </div>
 
-          <Text>
+          <Text className='p-r'>
             Номер мобильного телефона
             <Clue dataSet='Подсказка 6' />
           </Text>
 
-          <InputTel
-            placeholder="Enter your number"
-            value={phone || ''}
-            onChange={handlePhoneChange}
-          />
-          <span className={`error-message ${errors.phone ? 'active' : ''}`}>{errors.phone}</span>
-
-
+          <div className="form-row">
+            <InputTel
+              placeholder="Enter your number"
+              value={phone || ''}
+              onChange={handlePhoneChange}
+            />
+            <span className={`error-message ${errors.phone ? 'active' : ''}`}>{errors.phone}</span>
+          </div>
           <FormButton appearence='small' type="button" onClick={handleNext}>Далее</FormButton>
+
         </>}
 
         {step === 1 && (
           <>
             <Heading>Выберите программу</Heading>
-            {availablePrograms.length > 0 ? (
-              <>
-                {availablePrograms.map((programItem) => (
-                  <InputRadio
-                    appearence='big'
-                    key={programItem.id}
-                    name="program"
-                    value={programItem.name}
-                    checked={selectedProgram === programItem.name}
-                    onChange={() => handleProgramSelect(programItem.name)}
-                  >
-                    <span>{programItem.name}</span>
-                    <b>Общее покрытие - 20 000 EUR</b>
-                    <Text appearence='small'>Медицинское лучение, репатриация и другое </Text>
-                  </InputRadio>
-                ))}
+            <div className="form-row">
+              {availablePrograms.length > 0 ? (
+                <>
+                  {availablePrograms.map((programItem) => (
+                    <InputRadio
+                      appearence='big'
+                      key={programItem.id}
+                      name="program"
+                      value={programItem.name}
+                      checked={selectedProgram === programItem.name}
+                      onChange={() => handleProgramSelect(programItem.name)}
+                    >
+                      <span>{programItem.name}</span>
+                      <b>Общее покрытие - 20 000 EUR</b>
+                      <Text appearence='small'>Медицинское лучение, репатриация и другое </Text>
+                    </InputRadio>
+                  ))}
 
-              </>
-            ) : (
-              <p>Нет доступных программ для выбранной страны.</p>
-            )}
-            <span className={`error-message ${errors.program ? 'active' : ''}`}>{errors.program}</span>
+                </>
+              ) : (
+                <p>Нет доступных программ для выбранной страны.</p>
+              )}
 
+              <span className={`error-message ${errors.program ? 'active' : ''}`}>{errors.program}</span>
+            </div>
             <FormButton type="button" appearence='big' onClick={handleNext}>
               <span>Выбрать Gold</span>
               <span>UZS 173.231</span>
@@ -252,7 +260,7 @@ function App() {
 
         }
         <HeadStepsButton count={step} onClick={handlePrev} />
-        <Text appearence='small'>
+        <Text appearence='small' className='p-small '>
           <span className='attention'>
             <svg width="2" height="7" viewBox="0 0 2 7" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1.64205 0.181818L1.56818 4.3267H0.78125L0.707386 0.181818H1.64205ZM1.17614 6.05398C1.01894 6.05398 0.88447 5.99905 0.772727 5.8892C0.660985 5.77746 0.606061 5.64299 0.607955 5.4858C0.606061 5.33049 0.660985 5.19792 0.772727 5.08807C0.88447 4.97633 1.01894 4.92045 1.17614 4.92045C1.32955 4.92045 1.46212 4.97633 1.57386 5.08807C1.68561 5.19792 1.74242 5.33049 1.74432 5.4858C1.74242 5.58996 1.71496 5.68561 1.66193 5.77273C1.6108 5.85795 1.54261 5.92614 1.45739 5.97727C1.37216 6.02841 1.27841 6.05398 1.17614 6.05398Z" fill="white" />

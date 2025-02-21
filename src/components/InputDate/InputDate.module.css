@@ -3,7 +3,6 @@
     grid-template-columns: 20% 40% 30% 10%;
     width: 100%;
     gap: 1em;
-    margin-bottom: 0.5em;
 }
 
 .dropdown {
@@ -23,12 +22,18 @@
     border: none;
     cursor: pointer;
     transition: box-shadow 0.5s;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
     width: 100%;
 }
 
+@media (max-width: 980px) {
+    .select {
+        font-size: var(--fz);
+    }
+}
+
 .day {
-    min-width: calc(var(--offset) * 3);
+    min-width: calc(var(--offset) * 4);
 }
 
 .year {
@@ -60,6 +65,7 @@
     margin-top: 0.5em;
 }
 
+
 .options::-webkit-scrollbar {
     width: calc(var(--offset) * 0.5) !important;
     height: calc(var(--offset) * 2) !important;
@@ -79,15 +85,27 @@
     font-size: calc(var(--fz) * 0.6);
 }
 
+@media (max-width: 980px) {
+    .option {
+        font-size: var(--fz);
+    }
+}
+
 .option:hover {
     background-color: var(--color-bg-dark-gray);
     color: white;
 }
 
 .custom-calendar {
-
     width: calc(var(--offset) * 1.5);
     height: calc(var(--offset) * 1.5);
+}
+
+@media (max-width: 980px) {
+    .custom-calendar {
+        width: calc(var(--offset) * 2);
+        height: calc(var(--offset) * 2);
+    } 
 }
 
 .custom-calendar input {
@@ -104,8 +122,8 @@
 
 
 .calendar-icon {
-    width: calc(var(--offset) * 1.4);
-    height: calc(var(--offset) * 1.4);
+    width: 100%;
+    height: 100%;
     border-radius: 0.6em;
     border: 0.1em solid var(--color-icon);
     display: flex;
@@ -132,4 +150,11 @@
     stroke: var(--color-icon);
     transition-duration: 0.5s;
     transition-property: stroke;
+}
+
+@media (max-width: 980px) {
+    .calendar-icon svg {
+        width: calc(var(--offset) * 1.2);
+        height: calc(var(--offset) * 1.2);
+    } 
 }

@@ -14,8 +14,14 @@
     background-color: var(--color-bg-gray);
     border: none;
     cursor: pointer;
+    margin-bottom: 0.3em;
     transition: box-shadow 0.5s;
-    margin-bottom: 1em;
+}
+
+@media (max-width: 980px) {
+    .select {
+        font-size: var(--fz);
+    }
 }
 
 .options {
@@ -47,6 +53,12 @@
     cursor: pointer;
     transition: background-color 0.3s;
     font-size: calc(var(--fz) * 0.6);
+}
+
+@media (max-width: 980px) {
+    .option {
+        font-size: var(--fz);
+    }
 }
 
 .option:hover {

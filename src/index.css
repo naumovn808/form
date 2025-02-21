@@ -183,6 +183,15 @@ html {
 	min-height: 100%;
 	overflow-x: hidden;
 	width: 100vw;
+	padding: calc(var(--offset) * 2);
+}
+
+@media (max-width: 980px) {
+
+	.main-wrapper {
+		padding: var(--offset);
+	}
+
 }
 
 .footer {
@@ -235,6 +244,12 @@ select {
 	transition-duration: 0.5s;
 }
 
+@media (max-width: 980px) {
+	.custom-select::after {
+		width: calc(var(--offset) * 0.9);
+		height: calc(var(--offset) * 0.5);
+	}
+}
 
 .custom-select.small::after {
 	width: calc(var(--offset) * 0.5);
@@ -242,13 +257,23 @@ select {
 	background-image: url('/images/form-select-small.svg');
 }
 
+
+@media (max-width: 980px) {
+
+	.custom-select.small::after {
+		width: calc(var(--offset) * 0.8);
+		height: calc(var(--offset) * 0.4);
+	}
+}
+
+
 .custom-select.open::after {
 	transform: translate(-50%, -50%) rotate(180deg);
 }
 
 .radios-wrapper {
-	padding-top: 0.8em;
-	margin-bottom: 1em;
+	padding-top: 0.5em;
+	padding-bottom: 1em;
 	position: relative;
 	display: flex;
 	gap: 1em;
@@ -288,12 +313,43 @@ select {
 	margin-bottom: 1em;
 }
 
+.form-row {
+	position: relative;
+	padding-bottom: 1em;
+	margin-bottom: 0.4em;
+	width: 100%;
+}
+
+.form-row__container {
+	position: relative;
+	width: 100%;
+}
+
 .error-message {
+	position: absolute;
+	left: 0;
+	bottom: 0;
 	color: red;
 	font-size: 0.8em;
-	display: none; 
-  }
-  
-  .error-message.active {
-	display: block; 
-  }
+	display: none;
+}
+
+.error-message.active {
+	display: block;
+}
+
+.position {
+	transform: translateY(-80%);
+}
+
+.p-r {
+	padding-right: 1em;
+}
+
+@media (max-width: 980px) {
+
+	.p-small {
+		font-size: calc(var(--fz) * 0.8) !important;
+		/* пока так оставлю */
+	}
+}

@@ -42,6 +42,7 @@ if (localStorage.getItem('formData')) {
     }
 }
 
+// можно все одной функцией, но думаю для прода частичная отправка данных должна быть, пока так оставлю
 
 const formSlice = createSlice({
     name: 'form',
@@ -51,7 +52,7 @@ const formSlice = createSlice({
             state.formData = { ...state.formData, ...action.payload };
             localStorage.setItem('formData', JSON.stringify(state.formData));
         },
-        
+
         setProgram: (state, action: PayloadAction<string | null>) => {
             state.formData.program = action.payload;
             localStorage.setItem('formData', JSON.stringify(state.formData));

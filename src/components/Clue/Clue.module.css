@@ -17,6 +17,15 @@
     cursor: pointer;
 }
 
+@media (max-width: 980px) {
+    .clue {
+        width: calc(var(--offset) * 1.5);
+        font-size: var(--fz);
+        height: calc(var(--offset) * 1.5);
+    }
+
+}
+
 .clue::after {
     position: absolute;
     bottom: 100%;
@@ -26,7 +35,7 @@
     display: block;
     display: none;
     text-align: center;
-    min-width: calc(var(--offset)* 4);
+    min-width: calc(var(--offset)* 5);
     padding: 0.5em;
     border-radius: 0.5em;
     background-color: var(--color-text-secondary);
@@ -34,6 +43,8 @@
 
 }
 
-.clue:hover::after {
+
+.clue:hover::after,
+.clue:focus::after {
     display: block;
 }

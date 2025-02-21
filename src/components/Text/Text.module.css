@@ -4,10 +4,17 @@
     color: var(--color-text-primary);
     display: flex;
     align-items: flex-start;
-    width: 100%;
+    max-width: 100%;
     gap: 0.5em;
     position: relative;
+    margin-bottom: 0.5em;
 
+}
+
+@media(max-width: 980px) {
+    .text {
+        font-size: calc(var(--fz) * 1.4);
+    }
 }
 
 .small {
@@ -17,8 +24,21 @@
     margin-bottom: 0;
 }
 
+@media(max-width: 980px) {
+    .small {
+        font-size: calc(var(--fz) * 1.2);
+    }
+}
+
+
 .big {
     font-weight: 600;
     font-size: var(--fz);
     color: var(--color-text-dark-blue);
+}
+
+@media(max-width: 980px) {
+    .big {
+        font-size: calc(var(--fz) * 1.6);
+    }
 }

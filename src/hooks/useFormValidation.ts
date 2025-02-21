@@ -18,9 +18,9 @@ const useFormValidation = (formData: FormData, validationOptions: ValidationOpti
         program: ''
     });
 
+    // текст ваалидации обычно с бэка, пока сделаю так
     const validate = useCallback(() => {
         const newErrors = { ...errors };
-
         newErrors.country = formData.country ? '' : 'Пожалуйста, выберите страну.';
         newErrors.coverageType = formData.coverageType.length > 0 ? '' : 'Пожалуйста, выберите тип покрытия.';
         newErrors.startDate = formData.startDate ? '' : 'Пожалуйста, выберите дату начала.';
@@ -44,7 +44,7 @@ const useFormValidation = (formData: FormData, validationOptions: ValidationOpti
         return Object.values(newErrors).every(error => error === '');
     }, [formData, errors, step]);
 
-    const clearError = useCallback((fieldName: keyof FormData) => { 
+    const clearError = useCallback((fieldName: keyof FormData) => {
         setErrors(prevErrors => ({ ...prevErrors, [fieldName]: '' }));
     }, []);
 

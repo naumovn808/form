@@ -20,6 +20,12 @@
     margin-bottom: 1em;
 }
 
+@media (max-width: 980px) {
+    .button {
+        font-size: calc(var(--fz) *1.2);
+    }
+}
+
 .small {
     padding: 0.6em 2em;
 }
